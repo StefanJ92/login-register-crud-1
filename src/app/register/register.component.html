@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="singUp-card">
+      <div class="text-center">
+        <h1>Sign Up</h1>
+      </div>
+      <form [formGroup]="singUpForm" (ngSubmit)="signUp()" class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter first name</mat-label>
+          <input formControlName="firstName" matInput>
+        </mat-form-field>
+        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+          <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter last name</mat-label>
+          <input formControlName="lastName" matInput>
+        </mat-form-field>
+        <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+          <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter email</mat-label>
+          <input formControlName="email" matInput>
+        </mat-form-field>
+        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+          <div *ngIf="f['email'].errors['required']">Email is required</div>
+          <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter password</mat-label>
+          <input formControlName="password" matInput [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+        </mat-form-field>
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+          <div *ngIf="f['password'].errors['required']">Password is required</div>
+          <div *ngIf="f['password'].errors['minLength']">Password must be at least 6 characters</div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm password</mat-label>
+          <input formControlName="confirmPassword" matInput
+            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
+        </mat-form-field>
+        <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+          <div *ngIf="f['confirmPassword'].errors['required']">Conform Password is required</div>
+          <div *ngIf="f['confirmPassword'].errors['mustMatch']">Password and confirm not match</div>
+        </div>
+        <label id="radio-group-label">Pick user role:</label>
+        <mat-radio-group formControlName="role" class="example-radio-group">
+          <mat-radio-button class="example-radio-button" *ngFor="let role of mainRole" [value]="role">
+            {{role}}
+          </mat-radio-button>
+        </mat-radio-group>
+        <button mat-button color="accent">Sing UP</button>
+        <a routerLink="/login" class="btn btn-secondary">Already have account! Click to Login</a>
+      </form>
+    </div>
+  </div>
